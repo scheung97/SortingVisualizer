@@ -9,21 +9,40 @@ size = 5  #1000
 
 # low <= randint <= high-1 (aka max = high-1)
 rand_array = np.random.randint(low, high, size) 
+np.random.shuffle(rand_array)
 
+np.random.seed(6969) 
+
+x = np.arange(0, size, 1)
+fig, ax = plt.subplots() 
+ax.bar(x, rand_array, align="edge", width=0.8)
+
+
+sorting_algo = "Selection"
 def SelectionSort1(arr): 
     for i in range(len(arr)): 
         for j in range(i+1,len(arr)): 
+            plt.bar(x, rand_array)
+            plt.pause(1)
+            plt.clf()
+
             if arr[i] > arr[j]: 
                 arr[i], arr[j] = arr[j], arr[i]
+    plt.show()
+    ax.set(xlabel="Index", ylabel="Value", title=f"{sorting_algo} sort")
     return arr
 
 def SelectionSort2(arr): 
     for i in range(len(arr)): 
         min_idx = i
         for j in range(i+1,len(arr)): 
+            plt.bar(x, rand_array)
+            plt.pause(0.01)
+            plt.clf()
             if arr[i] > arr[j]: 
                 min_idx = j
         arr[i], arr[min_idx] = arr[min_idx], arr[i]
+    plt.show()
     return arr
 
 def InsertionSort(arr): 
@@ -131,10 +150,10 @@ def HeapSort(arr):
     return arr 
 
 def BubbleSort(arr): 
-    # https://www.tutorialspoint.com/data_structures_algorithms/bubble_sort_algorithm.htm
     for i in range(len(arr)): 
         for j in range(0, len(arr)-i-1): 
             if arr[j] > arr[j+1]: 
                 arr[j], arr[j+1] = arr[j+1], arr[j]
     return arr  
 
+SelectionSort1(rand_array)
