@@ -1,7 +1,7 @@
 import numpy as np
-
 import unittest
-from sorting_main import *
+from sorting_algos import *
+
 def createArray(): 
         low = 1,
         high = 1_000,
