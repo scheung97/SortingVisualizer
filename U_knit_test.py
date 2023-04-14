@@ -1,7 +1,7 @@
 import numpy as np
-
 import unittest
-from sorting import SelectionSort1, SelectionSort2
+from sorting_algos import *
+
 def createArray(): 
         low = 1,
         high = 1_000,
@@ -26,11 +26,37 @@ class TestSorting(unittest.TestCase):
         actual = SelectionSort2(arr)
         expected = sorted(arr)
         self.assertEqual(actual.tolist(), expected)#, f"Should be: {sorted(arr)}")
+
     
+    def test_insertion_sort(self): 
+        global arr
+        actual = InsertionSort(arr)
+        expected = sorted(arr)
+        self.assertEqual(actual.tolist(), expected)#, f"Should be: {sorted(arr)}")
+   
+    def test_merge_sort(self): 
+        global arr
+        actual = MergeSort(arr,l=0, r = len(arr)-1)
+        expected = sorted(arr)
+        self.assertEqual(actual.tolist(), expected)#, f"Should be: {sorted(arr)}")
     
-
-
-
+    def test_quick_sort(self): 
+        global arr
+        actual = QuickSort(arr, low = 0, high = len(arr)-1)
+        expected = sorted(arr)
+        self.assertEqual(actual.tolist(), expected)#, f"Should be: {sorted(arr)}")
+    
+    def test_heap_sort(self): 
+        global arr
+        actual = HeapSort(arr)
+        expected = sorted(arr)
+        self.assertEqual(actual.tolist(), expected)#, f"Should be: {sorted(arr)}")
+    
+    def test_bubble_sort(self): 
+        global arr
+        actual = BubbleSort(arr)
+        expected = sorted(arr)
+        self.assertEqual(actual.tolist(), expected)#, f"Should be: {sorted(arr)}")
 
 if  __name__ ==  "__main__": 
     unittest.main()
