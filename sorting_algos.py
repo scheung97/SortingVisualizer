@@ -1,30 +1,95 @@
+import matplotlib.pyplot as plt
+
 def SelectionSort1(arr): 
     for i in range(len(arr)): 
         for j in range(i+1,len(arr)): 
             if arr[i] > arr[j]: 
+                # Highlight current swap 
+                plt.clf() 
+                colors = ['blue'] * len(arr)
+                colors[i] = 'red'
+                colors[j] = 'red'
+                plt.bar(range(len(arr)), arr, color = colors)
+                plt.pause(0.5)
+
+                # Swap elements
                 arr[i], arr[j] = arr[j], arr[i]
+
+            # Highlight steps between swaps 
+            plt.clf() 
+            colors = ['blue'] * len(arr)
+            colors[i] = 'red'
+            colors[j] = 'red'
+            plt.bar(range(len(arr)), arr, color = colors)
+            plt.pause(0.5)
+            colors[i] = 'blue'
+            colors[j] = 'blue'
+            plt.bar(range(len(arr)), arr, color = colors)         
     return arr
 
 def SelectionSort2(arr): 
     for i in range(len(arr)): 
         min_idx = i
-        for j in range(i+1,len(arr)): 
-            if arr[i] > arr[j]: 
+        for j in range(i+1, len(arr)): 
+            if arr[min_idx] > arr[j]: 
                 min_idx = j
-        arr[i], arr[min_idx] = arr[min_idx], arr[i]
+        
+        if min_idx != i: 
+            # Highlight current swap 
+            plt.clf() 
+            colors = ['blue'] * len(arr)
+            colors[i] = 'red'
+            colors[min_idx] = 'red'
+            plt.bar(range(len(arr)), arr, color = colors)
+            plt.pause(0.5)
+
+            # Swap elements
+            arr[i], arr[min_idx] = arr[min_idx], arr[i]
+
+        # Highlight steps between swaps 
+        plt.clf() 
+        colors = ['blue'] * len(arr)
+        colors[i] = 'red'
+        colors[min_idx] = 'red'
+        plt.bar(range(len(arr)), arr, color = colors)
+        plt.pause(0.5)
     return arr
 
+#need to update this 
 def InsertionSort(arr): 
-    for i in range(len(arr)): 
+    for i in range(1,len(arr)): 
         chosen_ele = arr[i]
-        location = i 
-        while location > 0 and arr[location - 1] > chosen_ele: 
-            arr[location] = arr[location-1]
-            location = location-1
-        arr[location] = chosen_ele
+        location = i-1 
+
+        while location >= 0 and arr[location] > chosen_ele: 
+            arr[location+1] = arr[location]
+            location -= 1
+
+            # Update plot
+            plt.clf()
+            bars = plt.bar(range(len(arr)), arr, color = 'blue')
+            bars[location+1].set_color('red')
+            bars[i].set_color('red')
+            plt.pause(2)
+            bars[location].set_color('blue')
+            bars[i].set_color('blue')
+            
+        arr[location+1] = chosen_ele
+        plt.clf()
+        bars = plt.bar(range(len(arr)), arr, color = 'blue')
+        bars[location+1].set_color('red')
+        bars[i].set_color('red')
+        plt.pause(2)
+        bars[location].set_color('blue')
+        bars[i].set_color('blue')
+
+        # Update plot
+        plt.clf()
+        plt.bar(range(len(arr)), arr, color = 'blue')
+        plt.pause(0.05)
     return arr
 
-def merge(arr, l, m, r): 
+def merge(arr, l, m, r):
     # merges two subarrays of arr
     n1 = m - l + 1  
     n2 = r - m 
@@ -122,5 +187,26 @@ def BubbleSort(arr):
     for i in range(len(arr)): 
         for j in range(0, len(arr)-i-1): 
             if arr[j] > arr[j+1]: 
+                # Highlight current swap
+                plt.clf() 
+                colors = ['blue'] * len(arr)
+                colors[j] = 'red'
+                colors[j+1] = 'red'
+                plt.bar(range(len(arr)), arr, color = colors)
+                plt.pause(0.5)
+
+                # Swap elements
                 arr[j], arr[j+1] = arr[j+1], arr[j]
+
+            # Highlight steps between swaps 
+            plt.clf() 
+            colors = ['blue'] * len(arr)
+            colors[j] = 'red'
+            colors[j+1] = 'red'
+            plt.bar(range(len(arr)), arr, color = colors)
+            plt.pause(0.5)
+            colors[j] = 'blue'
+            colors[j+1] = 'blue'
+            plt.bar(range(len(arr)), arr, color = colors)
+
     return arr  

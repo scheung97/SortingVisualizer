@@ -5,22 +5,22 @@ import time
 
 DEBUG_MODE = 1
 
-def visualize_sorting(data,size): 
+def visualize_sorting(data,sorting_algo): 
     #create chart
     # x = np.arange(0, size, 1)
     # fig, ax = plt.subplots() 
     # ax.bar(x, rand_array, align="edge", width=0.8)
-    plt.bar(range(len(data)), data)
+    plt.bar(range(len(data)), data, color = 'blue')
     plt.draw()
-    plt.pause(1)
+    plt.pause(0.05)
 
 
     #sort data
-    sorted_data = sa.SelectionSort1(data)
+    sorted_data = sorting_algo(data)
 
     #display sorted data 
     plt.clf()
-    plt.bar(range(len(sorted_data)), sorted_data)
+    plt.bar(range(len(sorted_data)), sorted_data, color = 'blue')
     plt.draw()
     plt.pause(1)
     pass 
@@ -40,5 +40,6 @@ if __name__ == "__main__":
     print(f"Input Data: {rand_array}")
     
     # Visualize sort
-    visualize_sorting(rand_array, size)
+    visualize_sorting(rand_array.copy(), sa.SelectionSort1)
     
+    plt.close('all')
