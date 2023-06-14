@@ -131,9 +131,34 @@ def merge(arr, l, m, r):
 def MergeSort(arr, l, r): 
     if l < r: 
         m = l+(r-l)//2
+        
+        #update plot
+        plt.clf()
+        bars = plt.bar(range(len(arr)), arr, color='blue')
+        for i in range(l, m + 1):
+            bars[i].set_color('red')
+        for i in range(m + 1, r + 1):
+            bars[i].set_color('green')
+        plt.pause(1)
+
+        #Recursively sort
         MergeSort(arr, l, m)
         MergeSort(arr, m+1, r)
         merge(arr, l, m, r)
+
+        #update plot
+        plt.clf()
+        bars = plt.bar(range(len(arr)), arr, color='blue')
+        for i in range(l, m + 1):
+            bars[i].set_color('red')
+        for i in range(m + 1, r + 1):
+            bars[i].set_color('green')
+        plt.pause(1)
+
+        for i in range(l, r + 1):
+            bars[i].set_color('blue')
+        plt.pause(1)
+
     return arr
 
 def partition(arr, low, high): 
@@ -141,9 +166,43 @@ def partition(arr, low, high):
     i = low-1
     for j in range(low, high): 
         if  arr[j] <= piv: 
-            i+=1
-            arr[i], arr[j] = arr[j], arr[i]
-    arr[i+1], arr[high] = arr[high], arr[i+1]
+            i=i+1
+
+            #update plot 
+            plt.clf() 
+            colors = ['blue'] * len(arr)
+            colors[i] = 'red'
+            colors[j] = 'red'
+            plt.bar(range(len(arr)), arr, color = colors)
+            plt.pause(0.5)
+
+            (arr[i], arr[j]) = (arr[j], arr[i])
+        
+        # update plot
+        plt.clf() 
+        colors = ['blue'] * len(arr)
+        colors[j] = 'red'
+        colors[high] = 'red'
+        plt.bar(range(len(arr)), arr, color = colors)
+        plt.pause(0.5)
+
+    # update plot
+    plt.clf() 
+    colors = ['blue'] * len(arr)
+    colors[i+1] = 'red'
+    colors[high] = 'red'
+    plt.bar(range(len(arr)), arr, color = colors)
+    plt.pause(0.5)
+
+
+    (arr[i+1], arr[high]) = (arr[high], arr[i+1])  
+    
+    # update plot
+    plt.clf() 
+    colors = ['blue'] * len(arr)
+    plt.bar(range(len(arr)), arr, color = colors)
+    plt.pause(0.5)
+
     return i+1
 
 def QuickSort(arr, low, high): 
@@ -151,8 +210,7 @@ def QuickSort(arr, low, high):
         par = partition(arr, low, high)
         QuickSort(arr, low, par - 1)
         QuickSort(arr,  par + 1, high)
-    return arr 
-
+    return arr
 def heapify(arr, N, i): 
     largest = i # largest = root
     l = 2*i + 1
