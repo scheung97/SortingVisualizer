@@ -211,6 +211,7 @@ def QuickSort(arr, low, high):
         QuickSort(arr, low, par - 1)
         QuickSort(arr,  par + 1, high)
     return arr
+
 def heapify(arr, N, i): 
     largest = i # largest = root
     l = 2*i + 1

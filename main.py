@@ -7,11 +7,34 @@ DEBUG_MODE = 1
 
 def visualize_sorting(data,sorting_algo): 
     #sort data
-    try:
-        sorted_data = sorting_algo(data)
-        return sorted_data
-    except Exception as e:
-        print(e)
+    algo = sorting_algo.lower() 
+
+    if algo == "selectionsort1": 
+        sorted_data = sa.SelectionSort1(data)
+    
+    elif algo ==  "selectionsort2": 
+        sorted_data = sa.SelectionSort2(data) 
+    
+    elif algo ==  "insertionsort1": 
+        sorted_data = sa.InsertionSort(data) 
+    
+    elif algo ==  "mergesort": 
+        sorted_data = sa.MergeSort(data, 0, len(data)-1)
+    
+    elif algo ==  "quicksort": 
+        sorted_data = sa.QuickSort(data,0,len(data)-1) 
+    
+    elif algo ==  "heapsort": 
+        sorted_data = sa.HeapSort(data) 
+    
+    elif algo ==  "bubblesort": 
+        sorted_data = sa.BubbleSort(data)
+    else: 
+        sorted_data = "Command not recognized."
+        # print("Command not recognized.")
+        
+    return sorted_data 
+
 
 if __name__ == "__main__": 
     # For consistant array when debugging
@@ -28,6 +51,6 @@ if __name__ == "__main__":
     print(f"Input Data: {rand_array}")
 
     # Visualize sort
-    sorted_data = visualize_sorting(rand_array, sa.QuickSort(rand_array,0, len(rand_array)-1))
-    # print(sorted_data)
+    sorted_data = visualize_sorting(rand_array.copy(), "QuickSort")
+    print(sorted_data)
     plt.close('all')
